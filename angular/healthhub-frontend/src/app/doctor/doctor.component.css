@@ -1,0 +1,169 @@
+div.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+
+.doctor {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+
+}
+
+button {
+  background-color: #1F707B;
+  width: 150px;
+  margin-right: 10vw;
+  color: white;
+  height: 40px;
+  border: none;
+  font-size: 14px;
+  border-radius: 13px;
+  text-transform: uppercase;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #199A8E;
+}
+
+div.doctorCard {
+  display: flex;
+  background-color: #eee;
+  width: 82vw;
+  height: 40vh;
+  margin: 5vh 9vw;
+}
+
+div.info {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 40%;
+  background-color: #fff;
+}
+
+a {
+  color: #fff;
+  font-size: 1.1rem;
+  margin: 0;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+div.photo {
+  width: 10vw;
+  height: 10vw;
+  background-color: #fff;
+  overflow: hidden;
+  /*border: 2px black solid;*/
+  border-radius: 20px;
+}
+
+div.photo img {
+  padding: 0;
+  max-width: 100%;
+}
+
+.name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 16vh;
+  width: 22.5vw;
+}
+
+.name p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5vw;
+  text-transform: uppercase;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  background-color: #fff;
+}
+
+.days {
+  height: 35%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.day {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  border: solid #BBB 1px;
+
+}
+
+.day:hover {
+  cursor: pointer;
+}
+
+.day div:nth-child(1) {
+  font-size: 14px;
+}
+
+.day div:nth-child(2) {
+  font-size: 24px;
+}
+
+
+.hours {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.hour {
+  width: 7vw;
+  text-align: center;
+  margin: 8px;
+  border: solid #BBB 1px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5vw;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background-color: #fff;
+}
+
+.reserved {
+  border-color: #eee;
+  color: #eeeeee;
+}
+
+.selected {
+  border-color: #1F707B;
+  background-color: #1F707B;
+  color: white;
+}
+
+.hour:hover {
+  cursor: pointer;
+}
