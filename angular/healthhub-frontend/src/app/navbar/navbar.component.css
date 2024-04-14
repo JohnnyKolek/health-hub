@@ -1,5 +1,5 @@
 nav {
-  max-height: 80px;
+  max-height: 83px;
   background: #1F707B;
   width: 100%;
   display: flex;
@@ -8,6 +8,8 @@ nav {
   gap: 10vh;
   position: fixed;
   justify-content: center;
+  box-sizing: border-box;
+  border-bottom: 3px solid white;
 }
 
 nav ul {
