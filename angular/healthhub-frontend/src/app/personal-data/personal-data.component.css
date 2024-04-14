@@ -1,0 +1,82 @@
+.personal-data{
+  margin-top: 100px;
+}
+
+main {
+  text-transform: uppercase;
+  width: 100%;
+  margin: 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main div{
+  width: 70vw;
+  /*border: #1F707B solid 2px;*/
+}
+
+main div.wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 20px
+}
+
+main div ul{
+  display: flex;
+  flex-direction: column;
+  border: none;
+  gap: 40px;
+}
+
+main div ul li{
+  display: flex;
+  border: none;
+  background-color: #999;
+  height: 50px;
+  border-radius: 20px;
+  overflow: hidden;
+
+}
+
+li div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  color: #fff;
+}
+
+li div:first-child{
+  background-color: #199A8E;
+  width: 30%;
+}
+
+.choose{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.choose div{
+  width: 30vw;
+  height: 60px;
+  border: solid #ddd 1px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p{
+  font-size: 1.2rem;
+  color: white;
+  border-radius: 10px;
+  height: 60px;
+  background-color: #199A8E;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
