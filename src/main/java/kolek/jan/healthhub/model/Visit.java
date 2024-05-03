@@ -1,11 +1,18 @@
 package kolek.jan.healthhub.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
-
+@Getter
 @Entity
 @Table(name = "visits")
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
 public class Visit {
 
     @Id

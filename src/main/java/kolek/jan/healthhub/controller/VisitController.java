@@ -1,6 +1,10 @@
 package kolek.jan.healthhub.controller;
 
+import jakarta.persistence.EntityNotFoundException;
+import kolek.jan.healthhub.dto.VisitDto;
+import kolek.jan.healthhub.mapper.VisitMapper;
 import kolek.jan.healthhub.model.Visit;
+import kolek.jan.healthhub.repository.UserRepository;
 import kolek.jan.healthhub.repository.VisitRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,21 +18,57 @@ import java.util.List;
 public class VisitController {
 
     private final VisitRepository visitRepository;
+    private final UserRepository userRepository;
+    private final VisitMapper visitMapper;
 
     @GetMapping
-    public List<Visit> getVisits() {
-        return visitRepository.findAll();
+    public List<VisitDto> getVisits() {
+        return visitRepository.findAll()
+                .stream()
+                .map(visitMapper::toDto)
+                .toList();
+    }
+
+    @GetMapping("/doctor/{doctorId}")
+    public List<VisitDto> getDoctorVisits(@PathVariable Long doctorId) {
+        return visitRepository.findDoctorVisits(doctorId)
+                .stream()
+                .map(visitMapper::toDto)
+                .toList();
+    }
+
+    @GetMapping("/patient/{patientId}")
+    public List<VisitDto> getPatientVisits(@PathVariable Long patientId) {
+        return visitRepository.findPatientVisits(patientId)
+                .stream()
+                .map(visitMapper::toDto)
+                .toList();
     }
 
     @GetMapping("/{visitId}")
-    public Visit getVisitById(@PathVariable Long visitId){
-        return visitRepository.findById(visitId).orElse(null);
+    public VisitDto getVisitById(@PathVariable Long visitId) {
+        Visit visit = visitRepository.findById(visitId).orElseThrow(EntityNotFoundException::new);
+        return visitMapper.toDto(visit);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addVisit(@RequestBody Visit visit){
+    public void addVisit(@RequestBody Visit visit) {
         visitRepository.save(visit);
+    }
+
+    @PutMapping("/{visitId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void reserveVisit(@PathVariable Long visitId, @RequestParam Long patientId) {
+        Visit visit = visitRepository.findById(visitId).orElseThrow(EntityNotFoundException::new);
+        userRepository.findById(patientId);
+
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleVisitNotFound(EntityNotFoundException exception) {
+        return "Visit not Found: " + exception.getMessage();
     }
 
 }
