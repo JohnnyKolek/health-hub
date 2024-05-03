@@ -7,14 +7,14 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorComponent } from './doctors/doctor/doctor.component';
 import {RouterModule, Routes} from "@angular/router";
-import { HomeComponent } from './home/home.component';
+import { AuthComponent } from './auth/auth.component';
 import { PersonalDataComponent } from './personal-data/personal-data.component';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: AuthComponent},
   {path: 'doctors', component: DoctorsComponent},
   {path: 'personalData', component: PersonalDataComponent},
-  {path: 'home', component: HomeComponent}
+  {path: 'auth', component: AuthComponent}
 ];
 
 @NgModule({
@@ -23,7 +23,7 @@ const appRoutes: Routes = [
     NavbarComponent,
     DoctorsComponent,
     DoctorComponent,
-    HomeComponent,
+    AuthComponent,
     PersonalDataComponent
   ],
   imports: [
