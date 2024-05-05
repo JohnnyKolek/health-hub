@@ -11,7 +11,7 @@ public interface VisitRepository extends JpaRepository<Visit, Long> {
     @Query("select v from Visit v where v.doctor.id = ?1")
     List<Visit> findDoctorVisits(Long id);
 
-    @Query("select v from Visit v where v.patient.id = ?1")
-    List<Visit> findPatientVisits(Long id);
+    @Query("select v from Visit v where v.patient.email = ?1")
+    List<Visit> findPatientVisits(String email);
 
 }
