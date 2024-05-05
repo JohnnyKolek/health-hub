@@ -9,6 +9,8 @@ import { DoctorComponent } from './doctors/doctor/doctor.component';
 import {RouterModule, Routes} from "@angular/router";
 import { AuthComponent } from './auth/auth.component';
 import { PersonalDataComponent } from './personal-data/personal-data.component';
+import { RegisterComponent } from './auth/register/register.component';
+import {NgOptimizedImage} from "@angular/common";
 
 const appRoutes: Routes = [
   {path: '', component: AuthComponent},
@@ -24,12 +26,14 @@ const appRoutes: Routes = [
     DoctorsComponent,
     DoctorComponent,
     AuthComponent,
-    PersonalDataComponent
+    PersonalDataComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NgOptimizedImage
   ],
   providers: [],
   bootstrap: [AppComponent]
