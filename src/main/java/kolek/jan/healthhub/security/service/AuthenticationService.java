@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import kolek.jan.healthhub.dto.AuthenticationRequest;
 import kolek.jan.healthhub.dto.AuthenticationResponse;
 import kolek.jan.healthhub.dto.RegisterRequest;
+import kolek.jan.healthhub.exception.DuplicateEmailException;
 import kolek.jan.healthhub.model.Role;
 import kolek.jan.healthhub.model.User;
 import kolek.jan.healthhub.repository.RoleRepository;
@@ -35,6 +36,9 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        if (userRepository.existsByEmail(request.getEmail())){
+            throw new DuplicateEmailException("User with email: " + request.getEmail() + " already exists!");
+        }
         var user = User.builder()
                 .name(request.getName())
                 .surname(request.getSurname())
