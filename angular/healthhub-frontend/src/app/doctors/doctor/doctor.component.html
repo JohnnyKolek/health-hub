@@ -2,9 +2,13 @@
   <div class="doctor" id=1>
     <div class="doctorCard">
       <div class="info">
-        <div class="photo"><img src="/assets/img/doctor1.jpg" alt=""/></div>
+        <div class="photo">
+          <img [src]="doctor.photoUrl ? doctor.photoUrl : '/assets/img/default-photo.jpg'" alt=""
+               class="img-fluid"
+          />
+        </div>
         <div class="name">
-          <p>Doctor Dolittle</p>
+          <p>{{doctor.name}} {{doctor.surname}}</p>
         </div>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cupiditate debitis
           delectus
@@ -15,47 +19,11 @@
       </div>
       <div class="schedule">
         <div class="days">
-          <div class="day">
-            <div>Sat</div>
-            <div>13</div>
-            <div>04</div>
-            <div>2024</div>
-          </div>
-          <div class="day">
-            <div>Sat</div>
-            <div>13</div>
-            <div>04</div>
-            <div>2024</div>
-          </div>
-          <div class="day">
-            <div>Sat</div>
-            <div>13</div>
-            <div>04</div>
-            <div>2024</div>
-          </div>
-          <div class="day">
-            <div>Sat</div>
-            <div>13</div>
-            <div>04</div>
-            <div>2024</div>
-          </div>
-          <div class="day">
-            <div>Sat</div>
-            <div>13</div>
-            <div>04</div>
-            <div>2024</div>
-          </div>
-          <div class="day">
-            <div>Sat</div>
-            <div>13</div>
-            <div>04</div>
-            <div>2024</div>
-          </div>
-          <div class="day">
-            <div>Sat</div>
-            <div>13</div>
-            <div>04</div>
-            <div>2024</div>
+          <div class="day" *ngFor="let day of days" (click)="selectDay(day)" [class.selected]="isSelected(day)">
+            <div>{{ getDayOfWeek(day) }}</div>
+            <div>{{ day.getDate() }}</div>
+            <div>{{ getMonthName(day) }}</div>
+            <div>{{ day.getFullYear() }}</div>
           </div>
         </div>
         <div class="hours">

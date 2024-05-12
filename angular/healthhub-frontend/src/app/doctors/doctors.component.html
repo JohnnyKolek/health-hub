@@ -1,6 +1,3 @@
 <div class="doctors">
-  <app-doctor></app-doctor>
-  <app-doctor></app-doctor>
-  <app-doctor></app-doctor>
-  <app-doctor></app-doctor>
+  <app-doctor *ngFor="let doc of doctors" [doctor]="doc"></app-doctor>
 </div>

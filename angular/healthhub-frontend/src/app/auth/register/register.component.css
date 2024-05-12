@@ -26,7 +26,7 @@ form h1{
 }
 
 
-form div input{
+input{
   font-size: 0.7rem;
   height: 40px;
   border-radius: 12px;
@@ -60,6 +60,11 @@ form button{
 
 }
 
+button[disabled]{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 form button:hover{
   cursor: pointer;
   background-color: #1F707B;
@@ -70,6 +75,6 @@ p{
   font-size: 0.7rem;
 }
 
-.not-valid{
-  border-color: red;
+input.ng-invalid.ng-touched{
+  border: 1px solid red;
 }

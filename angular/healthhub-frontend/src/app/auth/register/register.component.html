@@ -1,16 +1,61 @@
 
-  <form class="register" action="register" method="POST">
+  <form class="register" (ngSubmit)="onSubmit()" #f="ngForm">
     <h1>Register</h1>
     <div>
-      <div class="messages">
-      </div>
-      <input name="email" type="text" placeholder="email@email.com">
-      <input name="password" type="password" placeholder="password">
-      <input name="confirmedPassword" type="password" placeholder="confirm password">
-      <input name="name" type="text" placeholder="name">
-      <input name="surname" type="text" placeholder="surname">
-      <input name="phone" type="text" placeholder="phone">
+      <input
+        name="email"
+        type="text"
+        id="email"
+        placeholder="email@email.com"
+        ngModel
+        required
+        email
+        #email="ngModel"
+      >
+      <span class="form-text" *ngIf="!email.valid && email.touched" >Please enter a valid email!</span>
+      <input
+        name="password"
+        type="password"
+        id="password"
+        placeholder="password"
+        ngModel
+        required
+      >
+      <input
+        name="confirmedPassword"
+        type="password"
+        id="confirmedPassword"
+        placeholder="confirm password"
+        ngModel
+        required
+      >
+      <input
+        name="name"
+        type="text"
+        id="name"
+        placeholder="name"
+        ngModel
+        required
+      >
+      <input
+        name="surname"
+        type="text"
+        id="surname"
+        placeholder="surname"
+        ngModel
+        required
+      >
+      <input
+        name="phone"
+        type="text"
+        id="phone"
+        placeholder="phone"
+        ngModel
+      >
     </div>
-    <button type="submit">REGISTER</button>
+    <button
+      type="submit"
+      [disabled]="!f.valid"
+    >REGISTER</button>
     <p>You already have account? <a href="login">Sign in</a></p>
   </form>

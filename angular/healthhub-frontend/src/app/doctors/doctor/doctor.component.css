@@ -62,11 +62,6 @@ div.photo {
   border-radius: 20px;
 }
 
-div.photo img {
-  padding: 0;
-  max-width: 100%;
-}
-
 .name{
   display: flex;
   justify-content: center;
