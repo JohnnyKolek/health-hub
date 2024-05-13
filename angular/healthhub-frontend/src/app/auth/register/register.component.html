@@ -57,5 +57,5 @@
       type="submit"
       [disabled]="!f.valid"
     >REGISTER</button>
-    <p>You already have account? <a href="login">Sign in</a></p>
+    <p>Do not have account? <a (click)="changeToLogin()">Sign up</a></p>
   </form>

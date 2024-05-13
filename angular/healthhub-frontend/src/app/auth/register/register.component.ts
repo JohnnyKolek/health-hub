@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {RegisterRequest} from "./register.request";
 import {HttpClient} from "@angular/common/http";
@@ -10,8 +10,8 @@ import {HttpClient} from "@angular/common/http";
 })
 export class RegisterComponent {
 
-  @ViewChild('f')
-  signupForm: NgForm
+  @ViewChild('f') signupForm: NgForm
+  @Output() switchMode = new EventEmitter();
 
   user: RegisterRequest;
 
@@ -36,6 +36,10 @@ export class RegisterComponent {
       .subscribe((responseData) => console.log(responseData));
 
     this.signupForm.reset();
+  }
+
+  changeToLogin(){
+    this.switchMode.emit();
   }
 
 }

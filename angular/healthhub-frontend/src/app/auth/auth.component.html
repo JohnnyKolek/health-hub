@@ -4,7 +4,8 @@
       <img ngSrc="/assets/img/logo.svg" alt="logo" height="579" width="519"/>
     </div>
     <div class="logo col-md-5 d-flex justify-content-center align-items-center">
-      <app-register></app-register>
+      <app-register *ngIf="!isLoginMode" (switchMode)="onSwitchMode()"></app-register>
+      <app-login *ngIf="isLoginMode" (switchMode)="onSwitchMode()"></app-login>
     </div>
   </div>
 </div>
