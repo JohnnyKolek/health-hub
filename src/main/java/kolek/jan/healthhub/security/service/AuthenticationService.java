@@ -15,6 +15,7 @@ import kolek.jan.healthhub.security.token.Token;
 import kolek.jan.healthhub.security.token.TokenRepository;
 import kolek.jan.healthhub.security.token.TokenType;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,6 +35,9 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final RoleRepository roleRepository;
     private final AuthenticationManager authenticationManager;
+
+    @Value("${application.security.jwt.expiration}")
+    private String tokenExpirationTime;
 
     public AuthenticationResponse register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())){
@@ -56,6 +60,9 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .expiresIn(tokenExpirationTime)
+                .userId(savedUser.getId())
+                .email(savedUser.getEmail())
                 .build();
     }
 
@@ -75,6 +82,9 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .expiresIn(tokenExpirationTime)
+                .userId(user.getId())
+                .email(user.getEmail())
                 .build();
     }
 

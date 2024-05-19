@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+import {AuthService} from "../auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginComponent {
   @ViewChild('f') loginForm: NgForm
   @Output() switchMode = new EventEmitter();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
   }
 
   changeToRegister() {
@@ -21,16 +23,18 @@ export class LoginComponent {
   onSubmit() {
     console.log(this.loginForm);
 
-    const loginRequest = {
+    const loginRequest: { email: string, password: string } = {
       "email": this.loginForm.value.email,
       "password": this.loginForm.value.password
     }
 
-    this.http.post('http://localhost:8080/api/v1/auth/authenticate', loginRequest)
-      .subscribe((responseData) => console.log(responseData));
+    this.authService.login(loginRequest)
+      .subscribe((responseData) => {
+        console.log(responseData);
+        this.router.navigate(['/doctors']);
+      });
 
     this.loginForm.reset();
-
   }
 
 }

@@ -14,12 +14,17 @@ import {NgOptimizedImage} from "@angular/common";
 import {LoginComponent} from './auth/login/login.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { AddVisitComponent } from './add-visit/add-visit.component';
+import { DoctorVisitsComponent } from './doctor-visits/doctor-visits.component';
 
 const appRoutes: Routes = [
   {path: '', component: AuthComponent},
   {path: 'doctors', component: DoctorsComponent},
   {path: 'personalData', component: PersonalDataComponent},
-  {path: 'auth', component: AuthComponent}
+  {path: 'auth', component: AuthComponent},
+  {path: 'addVisit', component: AddVisitComponent},
+  {path: 'doctorVisits', component: DoctorVisitsComponent}
+
 ];
 
 @NgModule({
@@ -31,7 +36,9 @@ const appRoutes: Routes = [
     AuthComponent,
     PersonalDataComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    AddVisitComponent,
+    DoctorVisitsComponent
   ],
   imports: [
     BrowserModule,

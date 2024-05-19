@@ -1,0 +1,95 @@
+h1{
+  text-align: center;
+}
+
+.messages{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.message{
+  text-align: center;
+  font-size: 12px;
+}
+
+
+a {
+  color: #fff;
+  font-size: 1.1rem;
+  margin: 0;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.logo img {
+  height: 80px;
+  padding: 5px;
+}
+
+.logo img:hover {
+  cursor: pointer;
+}
+
+main {
+  text-transform: uppercase;
+  width: 100%;
+  margin: 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+form {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10vh;
+}
+
+
+div.input {
+  display: flex;
+  flex-direction: column;
+  gap: 7vh;
+}
+
+input {
+  text-transform: uppercase;
+  height: 50px;
+  border-radius: 12px;
+  width: 20vw;
+  border: 1px solid #E5E7EB;
+  background: #F9FAFB;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+form h1{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+form button{
+  box-sizing: border-box;
+  color: white;
+  background-color: #199A8E;
+  width: 20vw;
+  height: 50px;
+  border-radius: 12px;
+  line-height: 30px;
+  border: none;
+  font-size: 1rem;
+  padding: 7px 0;
+}
+
+button:hover{
+  cursor: pointer;
+}

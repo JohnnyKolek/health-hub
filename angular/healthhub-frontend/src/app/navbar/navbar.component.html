@@ -3,8 +3,10 @@
     <img src="./assets/img/logo.svg" alt="logo" (click)="onLogoClick()"/>
   </div>
   <ul>
-    <li><a routerLink="doctors">Doctors</a></li>
-    <li><a routerLink="personalData">Personal Data</a></li>
-    <li><a routerLink="auth">logout</a></li>
+    <li><a routerLink="doctors" *ngIf="isAuthenticated">Doctors</a></li>
+    <li><a routerLink="personalData" *ngIf="isAuthenticated">Personal Data</a></li>
+    <li><a routerLink="addVisit" *ngIf="isAuthenticated">Add Visit</a></li>
+    <li><a routerLink="doctorVisits" *ngIf="isAuthenticated">My Visits</a></li>
+    <li><a routerLink="auth" *ngIf="isAuthenticated">logout</a></li>
   </ul>
 </nav>
