@@ -3,6 +3,7 @@ import {NgForm} from "@angular/forms";
 import {RegisterRequest} from "./register.request";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -13,14 +14,15 @@ export class RegisterComponent {
 
   @ViewChild('f') signupForm: NgForm
   @Output() switchMode = new EventEmitter();
+  error: string = null;
 
   registerRequest: RegisterRequest;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
 
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log(this.signupForm);
     this.registerRequest = new RegisterRequest(
       this.signupForm.value.email,
@@ -33,12 +35,26 @@ export class RegisterComponent {
     console.log(this.registerRequest)
 
     this.authService.register(this.registerRequest)
-      .subscribe((responseData) => console.log(responseData));
+      .subscribe(
+        (responseData) => {
+          console.log(responseData);
+          this.error = null
+          if (responseData.roles.includes('ROLE_DOCTOR')) {
+            this.router.navigate(['/addVisit']);
+          } else if (responseData.roles.includes("ROLE_PATIENT")) {
+            this.router.navigate(['/doctors']);
+          }
+        },
+        (err) => {
+          this.error = err.error
+          console.log(err.error)
+        }
+      );
 
     this.signupForm.reset();
   }
 
-  changeToLogin(){
+  changeToLogin() {
     this.switchMode.emit();
   }
 

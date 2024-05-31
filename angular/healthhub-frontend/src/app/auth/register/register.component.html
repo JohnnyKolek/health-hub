@@ -1,6 +1,9 @@
 
   <form class="register" (ngSubmit)="onSubmit()" #f="ngForm">
     <h1>Register</h1>
+    <div class="alert alert-danger" *ngIf="error">
+      <p>{{ error }}</p>
+    </div>
     <div>
       <input
         name="email"

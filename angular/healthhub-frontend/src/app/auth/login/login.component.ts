@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 export class LoginComponent {
   @ViewChild('f') loginForm: NgForm
   @Output() switchMode = new EventEmitter();
+  error: string = null;
 
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
   }
@@ -30,9 +31,15 @@ export class LoginComponent {
 
     this.authService.login(loginRequest)
       .subscribe((responseData) => {
-        console.log(responseData);
-        this.router.navigate(['/doctors']);
-      });
+          console.log(responseData);
+          if (responseData.roles.includes('ROLE_DOCTOR')) {
+            this.router.navigate(['/addVisit']);
+          } else if (responseData.roles.includes("ROLE_PATIENT")) {
+            this.router.navigate(['/doctors']);
+          }
+        },
+        err => this.error = err.error
+      );
 
     this.loginForm.reset();
   }

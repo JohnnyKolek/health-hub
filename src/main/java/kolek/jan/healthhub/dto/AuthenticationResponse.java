@@ -6,8 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -21,5 +20,6 @@ public class AuthenticationResponse {
     private String email;
     private long userId;
     private String expiresIn;
+    private List<String> roles;
 
 }
