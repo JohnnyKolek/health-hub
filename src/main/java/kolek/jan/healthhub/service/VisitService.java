@@ -40,4 +40,9 @@ public class VisitService {
         visitRepository.save(visit);
     }
 
+    public void addNewVisit(Visit visit) {
+        visitRepository.save(visit);
+    }
+
+
 }

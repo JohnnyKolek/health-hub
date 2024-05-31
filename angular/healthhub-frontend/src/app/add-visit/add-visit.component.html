@@ -1,16 +1,30 @@
 <main>
-  <form class="add-visit" action="addVisit" method="POST">
+  <form class="add-visit" (ngSubmit)="onSubmit()" #f="ngForm">
     <h1>add visit date</h1>
     <div class="input">
       <div class="messages">
       </div>
       <label>
-        <input name="date" type="date">
+        <input
+          name="date"
+          type="date"
+          id="date"
+          ngModel
+          required
+          #date="ngModel"
+        >
       </label>
       <label>
-        <input name="hour" type="time">
+        <input
+          name="hour"
+          type="time"
+          id="hour"
+          ngModel
+          required
+          #hour="ngModel"
+        >
       </label>
     </div>
-    <button type="submit">ADD</button>
+    <button type="submit" [disabled]="!f.valid">ADD</button>
   </form>
 </main>

@@ -1,8 +1,10 @@
 package kolek.jan.healthhub.controller;
 
 import jakarta.persistence.EntityNotFoundException;
+import kolek.jan.healthhub.dto.VisitCreationRequest;
 import kolek.jan.healthhub.dto.VisitDto;
 import kolek.jan.healthhub.mapper.VisitMapper;
+import kolek.jan.healthhub.model.User;
 import kolek.jan.healthhub.model.Visit;
 import kolek.jan.healthhub.repository.UserRepository;
 import kolek.jan.healthhub.repository.VisitRepository;
@@ -55,8 +57,12 @@ public class VisitController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addVisit(@RequestBody Visit visit) {
-        visitRepository.save(visit);
+    public void addVisit(@RequestBody VisitCreationRequest visit) {
+        User user = userRepository.findById(visit.getDoctorId())
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format("Doctor with id %d not found", visit.getDoctorId()))
+                );
+        visitService.addNewVisit(visitMapper.toEntity(visit, user));
     }
 
     @PutMapping("/{visitId}")
