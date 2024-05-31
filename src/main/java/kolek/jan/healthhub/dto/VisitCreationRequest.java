@@ -8,7 +8,6 @@ import java.time.LocalTime;
 
 @Data
 public class VisitCreationRequest {
-    private Long doctorId;
     private LocalDate date;
     @JsonFormat(pattern = "HH:mm")
     private LocalTime hour;

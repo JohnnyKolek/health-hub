@@ -17,7 +17,6 @@ export class AddVisitComponent {
     console.log("Form submitted!");
 
     const request = {
-      doctorId: 1,
       date: this.form.value.date,
       hour: this.form.value.hour
     }

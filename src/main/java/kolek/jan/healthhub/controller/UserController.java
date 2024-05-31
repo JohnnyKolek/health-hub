@@ -22,26 +22,6 @@ public class UserController {
 
     @GetMapping
     public List<UserDto> getDoctors(){
-//        return List.of(
-//                new UserDto(
-//                        3L,
-//                        "doctor1@gmail.com",
-//                        "Doctor",
-//                        "Oetker",
-//                        "",
-//                        "/assets/img/doctor1.jpg"
-//                ),
-//                new UserDto(
-//                        4L,
-//                        "doctor4@gmail.com",
-//                        "Doctor",
-//                        "Dolittle",
-//                        "",
-//                        "/assets/img/doctor1.jpg"
-//                )
-//        );
-//
-        System.out.println(RoleEnum.ROLE_DOCTOR.name());
         return userRepository.findByRoleName(RoleEnum.ROLE_DOCTOR.name())
                 .stream()
                 .map(userMapper::toDto)

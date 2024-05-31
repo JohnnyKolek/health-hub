@@ -13,9 +13,10 @@ import {RegisterComponent} from './auth/register/register.component';
 import {NgOptimizedImage} from "@angular/common";
 import {LoginComponent} from './auth/login/login.component';
 import {FormsModule} from "@angular/forms";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import { AddVisitComponent } from './add-visit/add-visit.component';
-import { DoctorVisitsComponent } from './doctor-visits/doctor-visits.component';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
+import {AddVisitComponent} from './add-visit/add-visit.component';
+import {DoctorVisitsComponent} from './doctor-visits/doctor-visits.component';
+import {AuthInterceptorService} from "./auth/auth-interceptor.service";
 
 const appRoutes: Routes = [
   {path: '', component: AuthComponent},
@@ -48,7 +49,13 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

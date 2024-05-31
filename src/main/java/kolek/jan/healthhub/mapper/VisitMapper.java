@@ -23,9 +23,8 @@ public class VisitMapper {
         return visitDto;
     }
 
-    public Visit toEntity(VisitCreationRequest visitCreationRequest, User doctor) {
+    public Visit toEntity(VisitCreationRequest visitCreationRequest) {
         Visit visit = new Visit();
-        visit.setDoctor(doctor);
         LocalDateTime dateTime = LocalDateTime.of(visitCreationRequest.getDate(), visitCreationRequest.getHour());
         visit.setDateTime(dateTime);
         return visit;

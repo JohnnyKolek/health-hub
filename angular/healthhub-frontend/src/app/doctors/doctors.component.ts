@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {DoctorModel} from "./doctor.model";
-import {map} from "rxjs";
+import {exhaustMap, map, take} from "rxjs";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-doctors',
@@ -16,9 +17,12 @@ export class DoctorsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get<DoctorModel[]>('http://localhost:8080/api/v1/doctors')
-      .subscribe(responseData => {
-            this.doctors = responseData;
+
+    this.http
+      .get<DoctorModel[]>('http://localhost:8080/api/v1/doctors',
+      )
+      .subscribe((responseData: DoctorModel[]) => {
+          this.doctors = responseData;
           console.log(responseData);
         }
       );

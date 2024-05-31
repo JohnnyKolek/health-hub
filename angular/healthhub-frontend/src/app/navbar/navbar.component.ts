@@ -22,6 +22,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;
+      this.isPatient = !!user && user.roles.includes("ROLE_PATIENT");
+      this.isDoctor = !!user && user.roles.includes("ROLE_DOCTOR");
       console.log(!user);
       console.log(!!user);
     });
@@ -31,6 +33,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     console.log('Image clicked!');
 
     this.router.navigate(['/auth']);
+  }
+
+  onLogout(){
+    this.authService.logout();
   }
 
   ngOnDestroy(): void {

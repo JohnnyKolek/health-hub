@@ -1,8 +1,9 @@
 import {Injectable} from "@angular/core";
-import {catchError, Subject, tap, throwError} from "rxjs";
+import {catchError, BehaviorSubject, tap, throwError} from "rxjs";
 import {User} from "./user.model";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {RegisterRequest} from "./register/register.request";
+import {Router} from "@angular/router";
 
 interface AuthResponseData {
   accessToken: string,
@@ -16,9 +17,9 @@ interface AuthResponseData {
 
 @Injectable({providedIn: "root"})
 export class AuthService {
-  user: Subject<User> = new Subject<User>()
+  user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   register(request: RegisterRequest) {
@@ -37,6 +38,11 @@ export class AuthService {
             this.handleAuthentication(resData.email, resData.userId, resData.accessToken, +resData.expiresIn, resData.roles);
           }
         ));
+  }
+
+  logout(){
+    this.user.next(null);
+    this.router.navigate(['/auth']);
   }
 
   private handleAuthentication(email: string, userId: number, token: string, expiresIn: number, roles: string[]) {

@@ -33,9 +33,10 @@ public class VisitController {
                 .toList();
     }
 
-    @GetMapping("/doctor/{doctorId}")
-    public List<VisitDto> getDoctorVisits(@PathVariable Long doctorId) {
-        return visitRepository.findDoctorVisits(doctorId)
+    @GetMapping("/doctor")
+    public List<VisitDto> getDoctorVisits(@RequestHeader("Authorization") String authorizationHeader) {
+
+        return visitService.getDoctorVisits(authorizationHeader)
                 .stream()
                 .map(visitMapper::toDto)
                 .toList();
@@ -57,12 +58,10 @@ public class VisitController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addVisit(@RequestBody VisitCreationRequest visit) {
-        User user = userRepository.findById(visit.getDoctorId())
-                .orElseThrow(() -> new EntityNotFoundException(
-                        String.format("Doctor with id %d not found", visit.getDoctorId()))
-                );
-        visitService.addNewVisit(visitMapper.toEntity(visit, user));
+    public void addVisit(@RequestBody VisitCreationRequest visit,
+                         @RequestHeader("Authorization") String authorizationHeader
+    ) {
+        visitService.addNewVisit(visitMapper.toEntity(visit), authorizationHeader);
     }
 
     @PutMapping("/{visitId}")

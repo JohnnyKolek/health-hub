@@ -1,31 +1,15 @@
 <main>
   <div>
     <div class="choose">
-      <a class="today">Today</a>
-      <a class="next">Next</a>
-      <a class="previous">Previous</a>
-      <div class="date"></div>
+      <a class="today" (click)="onToday()">Today</a>
+      <a class="next" (click)="onNext()">Next</a>
+      <a class="previous" (click)="onPrevious()">Previous</a>
+      <div class="date">{{currentDate | date: 'MM.dd.yyyy'}}</div>
     </div>
     <ul class="visits">
-      <li>
-        <div>13.04.2024</div>
-        <div>Mariusz Pudzianowski</div>
-      </li>
-      <li>
-        <div>13.04.2024</div>
-        <div>Mariusz Pudzianowski</div>
-      </li>
-      <li>
-        <div>13.04.2024</div>
-        <div>Mariusz Pudzianowski</div>
-      </li>
-      <li>
-        <div>13.04.2024</div>
-        <div>Mariusz Pudzianowski</div>
-      </li>
-      <li>
-        <div>13.04.2024</div>
-        <div>Mariusz Pudzianowski</div>
+      <li *ngFor="let visit of doctorVisits">
+        <div>{{visit.dateTime | date: 'MM.dd.yyyy HH:mm '}}</div>
+        <div>{{visit.patient}}</div>
       </li>
     </ul>
   </div>
