@@ -2,32 +2,16 @@
   <main>
     <div class="wrapper">
       <div class="choose">
-        <div><b>Name</b>: Mariusz</div>
-        <div><b>Surname</b>: Pudzianowski</div>
-        <div><b>email</b>: dzielnypacjent@gmail.com</div>
-        <div><b>Phone number</b>: 213721150</div>
+        <div><b>Name</b>: {{patient?.name}}</div>
+        <div><b>Surname</b>: {{patient?.surname}}</div>
+        <div><b>email</b>: {{patient?.email}}</div>
+        <div><b>Phone number</b>: {{patient?.phone}}</div>
       </div>
       <p>My Visits</p>
       <ul class="visits">
-        <li>
-          <div>13.04.2024</div>
-          <div>Doctor Oetker</div>
-        </li>
-        <li>
-          <div>13.04.2024</div>
-          <div>Doctor Oetker</div>
-        </li>
-        <li>
-          <div>13.04.2024</div>
-          <div>Doctor Oetker</div>
-        </li>
-        <li>
-          <div>13.04.2024</div>
-          <div>Doctor Oetker</div>
-        </li>
-        <li>
-          <div>13.04.2024</div>
-          <div>Doctor Oetker</div>
+        <li *ngFor="let visit of visits">
+          <div>{{visit.dateTime | date: 'MM.dd.yyyy HH:mm '}}</div>
+          <div>{{visit.doctor}}</div>
         </li>
       </ul>
     </div>

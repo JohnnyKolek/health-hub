@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -39,6 +40,15 @@ public class VisitService {
         return visitRepository.findDoctorVisits(doctor.getId());
     }
 
+    public List<Visit> getFreeDoctorVisitsById(Long id, String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        System.err.println(localDate);
+        return visitRepository.findDoctorVisits(id)
+                .stream()
+                .filter(v -> v.getDateTime().toLocalDate().equals(localDate) && v.getPatient() == null)
+                .toList();
+    }
+
     @Transactional
     public void addNewVisit(Visit visit, String token) {
 
@@ -62,7 +72,6 @@ public class VisitService {
         visit.setPatient(user);
         visitRepository.save(visit);
     }
-
 
 
 }

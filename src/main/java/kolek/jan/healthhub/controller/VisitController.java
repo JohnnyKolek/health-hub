@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -39,6 +40,17 @@ public class VisitController {
         return visitService.getDoctorVisits(authorizationHeader)
                 .stream()
                 .map(visitMapper::toDto)
+                .sorted(Comparator.comparing(VisitDto::getDateTime))
+                .toList();
+    }
+
+    @GetMapping("/doctor/{doctorId}")
+    public List<VisitDto> getFreeDoctorVisitsByIdAndDate(@PathVariable Long doctorId, @RequestParam String date) {
+
+        return visitService.getFreeDoctorVisitsById(doctorId, date)
+                .stream()
+                .map(visitMapper::toDto)
+                .sorted(Comparator.comparing(VisitDto::getDateTime))
                 .toList();
     }
 
@@ -47,6 +59,7 @@ public class VisitController {
         return visitService.getPatientVisits(authorizationHeader)
                 .stream()
                 .map(visitMapper::toDto)
+                .sorted(Comparator.comparing(VisitDto::getDateTime))
                 .toList();
     }
 

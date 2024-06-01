@@ -19,7 +19,7 @@ export class DoctorsComponent implements OnInit {
   ngOnInit(): void {
 
     this.http
-      .get<DoctorModel[]>('http://localhost:8080/api/v1/doctors',
+      .get<DoctorModel[]>('http://localhost:8080/api/v1/users/doctors',
       )
       .subscribe((responseData: DoctorModel[]) => {
           this.doctors = responseData;

@@ -27,27 +27,14 @@
           </div>
         </div>
         <div class="hours">
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
-          <div class="hour">8:00</div>
+          <div class="hour"
+               *ngFor="let visit of visits"
+               [class.selected]="isSelectedVisit(visit)"
+               (click)='onSelect(visit)'
+          >{{visit.dateTime | date: 'HH:mm'}} </div>
         </div>
       </div>
     </div>
   </div>
-  <button>submit</button>
+  <button [disabled]="selectedVisit===null" (click)="onSubmit()">submit</button>
 </div>
