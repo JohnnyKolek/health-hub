@@ -7,5 +7,4 @@ export class DoctorModel {
     public phone?: string,
     public photoUrl?: string
   ) {}
-  //roleIds: number[];
 }

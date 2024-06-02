@@ -10,6 +10,7 @@
       <li *ngFor="let visit of doctorVisits">
         <div>{{visit.dateTime | date: 'MM.dd.yyyy HH:mm '}}</div>
         <div>{{visit.patient}}</div>
+        <div [class.completed]="visit.completed" (click)="onComplete(visit)">{{visit.completed ? 'Completed' : 'Complete'}}</div>
       </li>
     </ul>
   </div>

@@ -1,5 +1,6 @@
 package kolek.jan.healthhub.controller;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.EntityNotFoundException;
 import kolek.jan.healthhub.dto.VisitCreationRequest;
 import kolek.jan.healthhub.dto.VisitDto;
@@ -35,13 +36,21 @@ public class VisitController {
     }
 
     @GetMapping("/doctor")
-    public List<VisitDto> getDoctorVisits(@RequestHeader("Authorization") String authorizationHeader) {
+    public List<VisitDto> getDoctorVisits(@RequestHeader("Authorization") String authorizationHeader, @RequestParam @Nullable String date) {
 
-        return visitService.getDoctorVisits(authorizationHeader)
-                .stream()
-                .map(visitMapper::toDto)
-                .sorted(Comparator.comparing(VisitDto::getDateTime))
-                .toList();
+        if (date == null) {
+            return visitService.getDoctorVisits(authorizationHeader)
+                    .stream()
+                    .map(visitMapper::toDto)
+                    .sorted(Comparator.comparing(VisitDto::getDateTime))
+                    .toList();
+        } else {
+            return visitService.getDoctorVisits(authorizationHeader, date)
+                    .stream()
+                    .map(visitMapper::toDto)
+                    .sorted(Comparator.comparing(VisitDto::getDateTime))
+                    .toList();
+        }
     }
 
     @GetMapping("/doctor/{doctorId}")
@@ -81,6 +90,12 @@ public class VisitController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void reserveVisit(@PathVariable Long visitId, @RequestHeader("Authorization") String authorizationHeader) {
         visitService.reserveVisit(authorizationHeader, visitId);
+    }
+
+    @PutMapping("completed/{visitId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void completeVisit(@PathVariable Long visitId) {
+        visitService.completeVisit(visitId);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)

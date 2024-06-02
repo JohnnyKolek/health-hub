@@ -37,13 +37,27 @@ li div{
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  color: #fff;
-  width: 70%;
 }
 
-li div:first-child{
+li div:nth-child(1){
+  color: #fff;
   background-color: #199A8E;
   width: 30%;
+}
+
+li div:nth-child(2){
+  color: #fff;
+  width: 50%;
+}
+
+li div:nth-child(3){
+  color: #fff;
+  width: 20%;
+  background-color: #bbb;
+}
+
+li div:nth-child(3).completed{
+  background-color: green;
 }
 
 .choose{

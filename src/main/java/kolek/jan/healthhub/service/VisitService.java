@@ -40,6 +40,22 @@ public class VisitService {
         return visitRepository.findDoctorVisits(doctor.getId());
     }
 
+    public List<Visit> getDoctorVisits(String token, String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        System.err.println(localDate);
+
+        String jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+
+        User doctor = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("USer not found"));
+
+        return visitRepository.findDoctorVisits(doctor.getId())
+                .stream()
+                .filter(v -> v.getDateTime().toLocalDate().equals(localDate))
+                .toList();
+    }
+
     public List<Visit> getFreeDoctorVisitsById(Long id, String date) {
         LocalDate localDate = LocalDate.parse(date);
         System.err.println(localDate);
@@ -70,6 +86,13 @@ public class VisitService {
                 );
         User user = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException(String.format("User with email: %s not found", email)));
         visit.setPatient(user);
+        visitRepository.save(visit);
+    }
+
+    public void completeVisit(Long visitId) {
+
+        Visit visit = visitRepository.findById(visitId).orElseThrow(() -> new EntityNotFoundException(String.format("Visit with id %d not found", visitId)));
+        visit.setCompleted(true);
         visitRepository.save(visit);
     }
 

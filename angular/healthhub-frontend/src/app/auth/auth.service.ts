@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {catchError, BehaviorSubject, tap, throwError} from "rxjs";
+import {BehaviorSubject, catchError, tap, throwError} from "rxjs";
 import {User} from "./user.model";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {RegisterRequest} from "./register/register.request";
@@ -40,7 +40,32 @@ export class AuthService {
         ));
   }
 
-  logout(){
+  autoLogin() {
+    const userData: {
+      email: string,
+      id: number,
+      _token: string,
+      _tokenExpirationDate: string,
+      roles: string[]
+    } = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate),
+      userData.roles
+    );
+
+    if(loadedUser.token){
+      this.user.next(loadedUser);
+    }
+
+  }
+
+  logout() {
     this.user.next(null);
     this.router.navigate(['/auth']);
   }
@@ -55,6 +80,7 @@ export class AuthService {
       roles
     );
     this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user))
   }
 
   private handleError(error: HttpErrorResponse) {
