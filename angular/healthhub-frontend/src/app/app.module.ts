@@ -17,14 +17,15 @@ import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/h
 import {AddVisitComponent} from './add-visit/add-visit.component';
 import {DoctorVisitsComponent} from './doctor-visits/doctor-visits.component';
 import {AuthInterceptorService} from "./auth/auth-interceptor.service";
+import {AuthGuard} from "./auth/auth.guard";
 
 const appRoutes: Routes = [
   {path: '', component: AuthComponent},
-  {path: 'doctors', component: DoctorsComponent},
-  {path: 'personalData', component: PersonalDataComponent},
+  {path: 'doctors', component: DoctorsComponent, canActivate: [AuthGuard]},
+  {path: 'personalData', component: PersonalDataComponent, canActivate: [AuthGuard]},
   {path: 'auth', component: AuthComponent},
-  {path: 'addVisit', component: AddVisitComponent},
-  {path: 'doctorVisits', component: DoctorVisitsComponent}
+  {path: 'addVisit', component: AddVisitComponent, canActivate: [AuthGuard]},
+  {path: 'doctorVisits', component: DoctorVisitsComponent, canActivate: [AuthGuard]}
 
 ];
 

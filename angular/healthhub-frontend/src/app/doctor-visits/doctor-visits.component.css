@@ -56,6 +56,10 @@ li div:nth-child(3){
   background-color: #bbb;
 }
 
+li div:nth-child(3):hover{
+  cursor: pointer;
+}
+
 li div:nth-child(3).completed{
   background-color: green;
 }
